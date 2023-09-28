@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import React, { useRef, useState } from "react";
 import Header from "./Header";
-import { Form, useNavigate } from "react-router-dom";
+import { Form } from "react-router-dom";
 import { checkValidateData } from "../utils/Validate";
 import {
   createUserWithEmailAndPassword,
@@ -11,12 +11,12 @@ import {
 import { auth } from "../utils/Firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/UserSlice";
+import { userAvtar } from "../utils/Constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const email = useRef(null);
   const password = useRef(null);
@@ -42,8 +42,9 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           updateProfile(user, {
+            //
             displayName: name.current.value,
-            photoURL: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+            photoURL: userAvtar,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -55,7 +56,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -77,8 +77,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
