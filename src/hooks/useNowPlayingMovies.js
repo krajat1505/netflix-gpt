@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { addNowPlayingMovies } from "../utils/MovieSlice";
 import { useEffect } from "react";
 
-const useNowPlayingMovies = () => {
+const useNowPlayingMovie = () => {
   const dispatch = useDispatch();
 
   const getNowPlayingMovie = async () => {
@@ -20,4 +20,4 @@ const useNowPlayingMovies = () => {
   }, []);
 };
 
-export default useNowPlayingMovies;
+export default useNowPlayingMovie;
