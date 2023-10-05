@@ -23,3 +23,6 @@ export const SupportedLanguages = [
   { identifier: "hindi", name: "Hindi" },
   { identifier: "spanish", name: "Spanish" },
 ];
+
+export const OpenApi_key =
+  "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";
